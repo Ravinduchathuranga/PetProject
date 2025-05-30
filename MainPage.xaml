@@ -8,11 +8,49 @@
             <Label 
                 Text="Task Manager"
                 TextColor="Black"
+                FontFamily="Roboto-Bold"
                 FontSize="32"
                 FontAttributes="Bold"
                 HorizontalTextAlignment="Center"
-                Margin="10"
+                Margin="20"
                 />
+            <StackLayout Padding="20" VerticalOptions="Center">
+                <Frame CornerRadius="10" BackgroundColor="{StaticResource ActiveColor}" Padding="10">
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <CheckBox 
+                            x:Name="TaskCheckBox" 
+                            Color="Gray" />
+                        <Label Text="Buy groceries" 
+                               HorizontalTextAlignment="Start"
+                               FontSize="18"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center" 
+                               TextColor="Black"                                
+                               />
+                        
+                        <ImageButton 
+                            Source="trash.png" 
+                            WidthRequest="280"
+                            HeightRequest="35"
+                            HorizontalOptions="End" 
+                            VerticalOptions="Center"                            
+                            />
+                    </HorizontalStackLayout>
+                </Frame>
+            </StackLayout>
+            <Button 
+                        Text="+ Add Note" 
+                        BackgroundColor="{StaticResource ButtonColor}" 
+                        TextColor="White"
+                        FontFamily="Roboto-Regular"
+                        CornerRadius="10" 
+                        HeightRequest="60" 
+                        WidthRequest="250" 
+                        FontSize="26" 
+                        VerticalOptions="End"
+                        HorizontalOptions="Center"
+                        Margin="30"
+                        />
             
         </Grid>
     </ScrollView>
