@@ -1,4 +1,6 @@
-﻿using SQLite;
+﻿using System;
+using System.Threading.Tasks;
+using SQLite;
 
 namespace PetProject
 {
@@ -11,7 +13,9 @@ namespace PetProject
         {
             try
             {
-                connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
+                var dbPath = Path.Combine(FileSystem.AppDataDirectory, DB_NAME);
+                System.Diagnostics.Debug.WriteLine($"Database path: {dbPath}");
+                connection = new SQLiteAsyncConnection(dbPath);
                 connection.CreateTableAsync<TaskModel>().GetAwaiter().GetResult();
             }
             catch (Exception ex)
@@ -21,7 +25,7 @@ namespace PetProject
             }
         }
 
-        public async Task<List<TaskModel>> GetTasksAsync()
+        public async Task<System.Collections.Generic.List<TaskModel>> GetTasksAsync()
         {
             if (connection == null)
                 throw new InvalidOperationException("Database connection is not initialized.");
@@ -32,13 +36,33 @@ namespace PetProject
         {
             if (connection == null)
                 throw new InvalidOperationException("Database connection is not initialized.");
-            await connection.InsertAsync(task);
+            if (task == null)
+            {
+                System.Diagnostics.Debug.WriteLine("SaveTaskAsync: Task is null");
+                throw new ArgumentNullException(nameof(task));
+            }
+            if (task.Id == 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"Inserting new task: Name={task.TaskName}, Status={task.TaskStatus}");
+                await connection.InsertAsync(task);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Updating task: Id={task.Id}, Name={task.TaskName}, Status={task.TaskStatus}");
+                await connection.UpdateAsync(task);
+            }
         }
 
         public async Task DeleteTaskAsync(TaskModel task)
         {
             if (connection == null)
                 throw new InvalidOperationException("Database connection is not initialized.");
+            if (task == null)
+            {
+                System.Diagnostics.Debug.WriteLine("DeleteTaskAsync: Task is null");
+                throw new ArgumentNullException(nameof(task));
+            }
+            System.Diagnostics.Debug.WriteLine($"Deleting task: Id={task.Id}, Name={task.TaskName}");
             await connection.DeleteAsync(task);
         }
     }

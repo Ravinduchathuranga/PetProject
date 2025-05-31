@@ -8,23 +8,22 @@
             VerticalOptions="Start"  
             HorizontalOptions="Center"  
             FontFamily="Roboto-Bold"  
-            FontSize="32"                        
-        />
+            FontSize="32" />
         <Frame Margin="20">
             <Entry 
                 x:Name="AddNote"
-              Placeholder="Entry"               
-              FontFamily="Roboto-Regula"
-              FontSize="22"
-              />
+                Placeholder="Entry"               
+                FontFamily="Roboto-Regular"
+                FontSize="22"
+                Text="{Binding NoteText}" />
         </Frame>
         <Grid Padding="20">
             <Label
                 x:Name="ErrorLabel"
-                Text="Task can not be empty"                
+                Text="{Binding ErrorText}"                
                 FontSize="18"
                 TextColor="Red"
-                />
+                IsVisible="{Binding IsErrorVisible}" />
         </Grid>
         <StackLayout Padding="30">
             <Button
@@ -32,8 +31,7 @@
                 FontFamily="Roboto-Bold"
                 FontSize="22"
                 BackgroundColor="{StaticResource ButtonColor}"
-                Clicked="OnAddTask" 
-             />
+                Command="{Binding AddTaskCommand}" />
         </StackLayout>
     </StackLayout>
 </ContentPage>
