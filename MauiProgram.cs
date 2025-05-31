@@ -17,7 +17,8 @@ namespace PetProject
                     fonts.AddFont("Roboto-Bold.ttf", "Roboto-Bold");
                     fonts.AddFont("Roboto-Regular.ttf", "Roboto-Regular");
                 });
-
+            builder.Services.AddSingleton<Connection>();
+            builder.Services.AddTransient<MainPage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
