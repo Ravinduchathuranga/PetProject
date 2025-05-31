@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PetProject.NewTask"
-             Title="NewTask">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="PetProject.NewTask">
+    <StackLayout>
+        <Label
+            Text="New Task"    
+            VerticalOptions="Start"  
+            HorizontalOptions="Center"  
+            FontFamily="Roboto-Bold"  
+            FontSize="32"                        
+        />
+        <Frame Margin="20">
+            <Entry 
+                x:Name="AddNote"
+              Placeholder="Entry"               
+              FontFamily="Roboto-Regula"
+              FontSize="22"
+              />
+        </Frame>
+        <Grid Padding="20">
+            <Label
+                x:Name="ErrorLabel"
+                Text="Task can not be empty"                
+                FontSize="18"
+                TextColor="Red"
+                />
+        </Grid>
+        <StackLayout Padding="30">
+            <Button
+                Text="Add"
+                FontFamily="Roboto-Bold"
+                FontSize="22"
+                BackgroundColor="{StaticResource ButtonColor}"
+                Clicked="OnAddTask" 
+             />
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

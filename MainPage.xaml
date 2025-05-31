@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PetProject.MainPage">
 
-    <ScrollView>
-        <Grid>
-            <Label 
+    <StackLayout>
+        <Label 
                 Text="Task Manager"
                 TextColor="Black"
                 FontFamily="Roboto-Bold"
@@ -14,45 +13,64 @@
                 HorizontalTextAlignment="Center"
                 Margin="20"
                 />
-            <StackLayout Padding="20" VerticalOptions="Center">
-                <Frame CornerRadius="10" BackgroundColor="{StaticResource ActiveColor}" Padding="10">
-                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                        <CheckBox 
-                            x:Name="TaskCheckBox" 
-                            Color="Gray" />
-                        <Label Text="Buy groceries" 
-                               HorizontalTextAlignment="Start"
-                               FontSize="18"
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Center" 
-                               TextColor="Black"                                
+        <ListView x:Name="taskListView" FlexLayout.Grow="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout Padding="5">
+                            <Frame 
+                                  x:Name="ItemFrame"
+                                  CornerRadius="10" 
+                                  BackgroundColor="{StaticResource ActiveColor}" 
+                                  Padding="10">
+                                <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                                    <CheckBox 
+                                        x:Name="TaskCheckBox" 
+                                        Color="Black" 
+                                        HorizontalOptions="Center"
+                                    />
+                                    <Label
+                                        x:Name="TaskName"
+                                        Text="{Binding TaskName}" 
+                                        HorizontalTextAlignment="Start"
+                                        FontSize="20"
+                                        FontFamily="Roboto-Regular"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" 
+                                        TextColor="Black"                                
                                />
-                        
-                        <ImageButton 
-                            Source="trash.png" 
-                            WidthRequest="280"
-                            HeightRequest="35"
-                            HorizontalOptions="End" 
-                            VerticalOptions="Center"                            
-                            />
-                    </HorizontalStackLayout>
-                </Frame>
-            </StackLayout>
-            <Button 
-                        Text="+ Add Note" 
-                        BackgroundColor="{StaticResource ButtonColor}" 
-                        TextColor="White"
-                        FontFamily="Roboto-Regular"
-                        CornerRadius="10" 
-                        HeightRequest="60" 
-                        WidthRequest="250" 
-                        FontSize="26" 
-                        VerticalOptions="End"
-                        HorizontalOptions="Center"
-                        Margin="30"
-                        />
-            
-        </Grid>
-    </ScrollView>
 
+                                    <ImageButton 
+                            Source="trash.png" 
+                            WidthRequest="300"
+                            HeightRequest="30"                            
+                            HorizontalOptions="End" 
+                            VerticalOptions="Center"                              
+                            />
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid>
+            <Button 
+                Text="+ Add Note" 
+                BackgroundColor="{DynamicResource ButtonColor}" 
+                TextColor="White"
+                FontFamily="Roboto-Regular"
+                CornerRadius="10" 
+                HeightRequest="60" 
+                WidthRequest="250" 
+                FontSize="26" 
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                Margin="30"
+                Clicked="OnAddNoteClicked"
+                />
+        </Grid>
+
+    </StackLayout>
 </ContentPage>

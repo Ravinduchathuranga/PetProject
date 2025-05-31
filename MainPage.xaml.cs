@@ -7,9 +7,9 @@
             InitializeComponent();
         }
 
-        //private static void OnAddNoteClicked()
-        //{
-        //    Console.WriteLine("Add Note button clicked!");
-        //}
+        private void OnAddNoteClicked(Object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewTask());
+        }
     }
 }
