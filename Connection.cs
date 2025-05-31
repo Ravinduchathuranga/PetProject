@@ -17,11 +17,11 @@ namespace PetProject
             return await connection.Table<TaskModel>().ToListAsync();
         }
 
-        public async Task<int> SaveTaskAsync(TaskModel task)
+        public async Task SaveTaskAsync(TaskModel task)
         {
-            if (task.Id != 0)
-                return await connection.UpdateAsync(task);
-            return await connection.InsertAsync(task);
+            if (task.Id != 0)                
+            await connection.InsertAsync(task);
+
         }
 
         public async Task DeleteTaskAsync(TaskModel task)
