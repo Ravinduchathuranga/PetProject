@@ -10,11 +10,11 @@ namespace PetProject
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("taskName")] // Fixed typo in column name from "tastName" to "taskName"
-        public string TaskName { get; set; }
+        [Column("taskName")]
+        public string? TaskName { get; set; }
 
         [Column("taskStatus")]
-        public bool TaskStatus { get; set; }
+        public Boolean TaskStatus { get; set; }
 
         // Added ToString method to prevent deletion-related error
         public override string ToString()
@@ -22,5 +22,4 @@ namespace PetProject
             return $"Id: {Id}, TaskName: {TaskName}, TaskStatus: {TaskStatus}";
         }
     }
-
 }
