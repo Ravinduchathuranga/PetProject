@@ -1,14 +1,17 @@
 
+using System.Threading.Tasks;
+
 namespace PetProject;
 
 public partial class NewTask : ContentPage
 {
+    private readonly Connection connection;
     public NewTask()
     {
         InitializeComponent();
         ErrorLabel.IsVisible = false;
     }
-    private void OnAddTask(Object sender, EventArgs e)
+    private async void OnAddTask(Object sender, EventArgs e)
     {
         String noteText = AddNote.Text;
 
@@ -25,12 +28,19 @@ public partial class NewTask : ContentPage
         }
         else
         {
-            
-            DisplayAlert("Success", "Note added successfully!", "OK");
+            await connection.SaveTaskAsync(new TaskModel
+
+            {
+                
+                TaskName = noteText,
+                TaskStatus=false
+            });
+
+            _=DisplayAlert("Success", "Note added successfully!", "OK");
 
             AddNote.Text = String.Empty;
 
-            Navigation.PopAsync();
+            _=Navigation.PopAsync();
         }
     }
 }
