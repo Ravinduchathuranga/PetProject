@@ -3,54 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PetProject.MainPage">
 
-    <StackLayout>
+    <StackLayout Padding="10">
         <Label 
                 Text="Task Manager"
                 TextColor="Black"
                 FontFamily="Roboto-Bold"
                 FontSize="32"
                 FontAttributes="Bold"
-                HorizontalTextAlignment="Center"
-                Margin="20"
+                HorizontalTextAlignment="Center"                
                 />
-        <ListView x:Name="taskListView" FlexLayout.Grow="1">
+        <ListView 
+                x:Name="taskListView" 
+                FlexLayout.Grow="5"
+            >
+            <!-- Adds space between items -->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <VerticalStackLayout Padding="5">
-                            <Frame 
-                                  x:Name="ItemFrame"
-                                  CornerRadius="10" 
-                                  BackgroundColor="{StaticResource ActiveColor}" 
-                                  Padding="10">
-                                <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                                    <CheckBox 
-                                        x:Name="TaskCheckBox" 
-                                        Color="Black" 
-                                        HorizontalOptions="Center"
-                                    />
-                                    <Label
-                                        x:Name="TaskName"
-                                        Text="{Binding TaskName}" 
-                                        HorizontalTextAlignment="Start"
-                                        FontSize="20"
-                                        FontFamily="Roboto-Regular"
-                                        VerticalOptions="Center" 
-                                        HorizontalOptions="Center" 
-                                        TextColor="Black"                                
-                               />
+                        <Frame 
+                    CornerRadius="10" 
+                    BackgroundColor="{StaticResource ActiveColor}" 
+                    Padding="0"
+                    Margin="0,5"
+                    HeightRequest="200">
+                            <!-- Fixed height -->
 
-                                    <ImageButton 
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <!-- Column 0: CheckBox -->
+                                <CheckBox 
+                            Grid.Column="0"
+                            Color="Black" 
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"/>
+
+                                <!-- Column 1: Task Name -->
+                                <Label
+                            Grid.Column="1"
+                            Text="{Binding TaskName}" 
+                            FontSize="20"
+                            FontFamily="Roboto-Regular"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Start" 
+                            TextColor="Black"
+                            Margin="15,0"/>
+
+                                <!-- Column 2: Delete Button -->
+                                <ImageButton 
+                            Grid.Column="2"
                             Source="trash.png" 
-                            WidthRequest="300"
+                            WidthRequest="30"
                             HeightRequest="30"                            
                             HorizontalOptions="End" 
-                            VerticalOptions="Center"                              
+                            VerticalOptions="Center"
+                            CommandParameter="{Binding }"                                    
+                            Clicked="OnDeleteNoteClicked"
                             />
-                                </HorizontalStackLayout>
-                            </Frame>
-
-                        </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
