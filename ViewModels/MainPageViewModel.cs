@@ -19,7 +19,6 @@ namespace PetProject.ViewModels
 
         public ICommand AddNoteCommand { get; }
         public ICommand DeleteNoteCommand { get; }
-        public ICommand UpdateTaskStatusCommand { get; }
 
         public MainPageViewModel()
         {
@@ -27,7 +26,6 @@ namespace PetProject.ViewModels
             Tasks = new System.Collections.ObjectModel.ObservableCollection<TaskModel>();
             AddNoteCommand = new Command(async () => await OnAddNote());
             DeleteNoteCommand = new Command<TaskModel>(async (task) => await OnDeleteNote(task));
-            UpdateTaskStatusCommand = new Command<TaskModel>(async (task) => await OnUpdateTaskStatus(task));
             LoadTasks();
         }
 
@@ -87,6 +85,9 @@ namespace PetProject.ViewModels
                     System.Diagnostics.Debug.WriteLine("UpdateTaskStatus: Task is null");
                     return;
                 }
+                task.TaskStatus = task.TaskStatus;
+                await Application.Current.MainPage.DisplayAlert("Success", "Task Status changed!", "OK");
+                
                 System.Diagnostics.Debug.WriteLine($"Updating task status: Id={task.Id}, Name={task.TaskName}, Status={task.TaskStatus}");
                 await _connection.SaveTaskAsync(task);
             }

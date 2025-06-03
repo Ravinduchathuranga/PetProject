@@ -65,5 +65,19 @@ namespace PetProject
             System.Diagnostics.Debug.WriteLine($"Deleting task: Id={task.Id}, Name={task.TaskName}");
             await connection.DeleteAsync(task);
         }
+        public async Task UpdateTaskAsync(TaskModel task)
+        {
+            if (connection == null)
+                throw new InvalidOperationException("Database connection is not initialized.");
+            if (task == null)
+            {
+                System.Diagnostics.Debug.WriteLine("DeleteTaskAsync: Task is null");
+                throw new ArgumentNullException(nameof(task));
+            }
+            System.Diagnostics.Debug.WriteLine($"Deleting task: Id={task.Id}, Name={task.TaskName}");
+            await connection.DeleteAsync(task);
+        }
+        
+        
     }
 }

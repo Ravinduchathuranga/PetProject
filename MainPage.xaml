@@ -36,8 +36,8 @@
                                 Color="Black" 
                                 VerticalOptions="Center"
                                 HorizontalOptions="Start"
-                                IsChecked="{Binding TaskStatus, Mode=TwoWay}" />
-                            
+                                IsChecked="{Binding TaskStatusCheck, Mode=TwoWay}"
+                                />
                             <Label Grid.Column="1"
                                    Text="{Binding TaskName}"
                                    FontSize="18"
